@@ -7,7 +7,7 @@ void print_fibonacci_series(int n) {
     return;
   }
 
-  if (n == 0) {
+  if (n == 1) {
     printf("%d\n", 0);
     return;
   }
