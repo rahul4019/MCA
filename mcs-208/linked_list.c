@@ -76,8 +76,9 @@ void insert_node(struct node **head) {
   ptr->next = new_node;
 }
 
-void delete(struct node **head) {
+void delete_node(struct node **head) {
   int key;
+
   printf("enter the value of element to be deleted\n");
   scanf("%d", &key);
 
@@ -87,7 +88,20 @@ void delete(struct node **head) {
     return;
   }
 
-  /* struct node *ptr = find() */
+  struct node *curr = *head;
+  struct node *prev = NULL;
+
+  while (curr != NULL) {
+    if (curr->data == key) {
+      prev->next = curr->next;
+      free(curr);
+      return;
+    }
+    prev = curr;
+    curr = curr->next;
+  }
+
+  printf("key not found\n");
 }
 
 // prints the LL
@@ -114,8 +128,8 @@ int main() {
     append_node(&head, element); // here we are passing address of the new node
   }
 
-  insert_node(&head);
-  /* delete (&head); */
+  /* insert_node(&head); */
+  delete_node(&head);
 
   traverse(head);
 }
