@@ -1,5 +1,5 @@
 # the map() function is a built-in function in python that applies a given function to each
-# item in an iterable (ex. list, tuple) and returns a map object (an iterator) containing the
+# item of an iterable (ex. list, tuple) and returns a map object (an iterator) containing the
 # result
 
 # key features:

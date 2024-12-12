@@ -1,106 +1,84 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX 3
 
-struct node {
-  int data;
-  struct node *next;
+struct stack {
+  int arr[MAX];
+  int top;
 };
 
-struct node *create_node(int data) {
-  struct node *new_node; // create a pointer of type struct node
-  new_node = (struct node *)malloc(
-      sizeof(struct node)); // create a new node in the heap memory
+typedef struct stack stack;
 
-  new_node->data = data;
-  new_node->next = NULL;
+void init_stack(stack *s1) { s1->top = -1; }
 
-  return new_node; // return the pointer
-}
+int is_empty(stack *s1) { return s1->top == -1; }
 
-// appends the node at the end
-void append_node(struct node **head, int data) {
-  struct node *new_node = create_node(data);
+int is_full(stack *s1) { return s1->top == MAX - 1; }
 
-  if (*head == NULL) {
-    *head = new_node;
+void push(stack *s1, int value) {
+  if (is_full(s1)) {
+    printf("stack overflow, cannot push\n");
+    return;
+  } else {
+    s1->arr[++s1->top] = value;
+    printf("pushed %d\n", value);
     return;
   }
-
-  struct node *temp = *head;
-
-  while (temp->next != NULL) {
-    temp = temp->next;
-  }
-
-  temp->next = new_node;
 }
 
-// find the node and returns its pointer
-struct node *find(struct node *start, int key) {
-  struct node *temp = start;
-  while (temp != NULL) {
-    if (temp->data == key) {
-      return temp;
+int pop(stack *s1) {
+  if (is_empty(s1)) {
+    printf("stack undeflow, cannot pop\n");
+    return -1;
+  } else {
+    return s1->arr[s1->top--];
+  }
+}
+
+void traverse(stack *s1) {
+  if (is_empty(s1)) {
+    printf("stack is empty");
+  } else {
+    printf("stack elements: \n");
+    for (int i = 0; i <= s1->top; i++) {
+      printf("%d ", s1->arr[i]);
     }
-    temp = temp->next;
   }
-  return NULL;
-}
-
-// inserts the node on finding the key inside node's data
-void insert_node(struct node **head) {
-  int key, element;
-
-  printf("enter the key: ");
-  scanf("%d", &key);
-
-  printf("enter the element: ");
-  scanf("%d", &element);
-
-  // handle the case if the head is having the key
-  if ((*head)->data == key) {
-    struct node *new_node = create_node(element);
-    new_node->next = *head;
-    *head = new_node;
-  }
-
-  struct node *ptr = find((*head)->next, key);
-
-  if (ptr == NULL) {
-    printf("key not found\n");
-  }
-
-  struct node *new_node = create_node(element);
-  new_node->next = ptr->next;
-  ptr->next = new_node;
-}
-
-void traverse(struct node *head) {
-  struct node *temp = head;
-
-  while (temp != NULL) {
-    printf("%d->", temp->data);
-    temp = temp->next;
-  }
-  printf("NULL\n");
 }
 
 int main() {
-  struct node *head = NULL;
 
-  int element = 0;
+  stack s1;
+  int choice, value;
+  init_stack(&s1);
 
-  while (element != -1) {
-    printf("enter the element, enter -1 to exit the loop: ");
-    scanf("%d", &element);
+  while (1) {
+    printf("Stack operations: \n");
+    printf("1: push\n");
+    printf("2: pop\n");
+    printf("3: traverse\n");
+    printf("4: exit\n");
+    scanf("%d", &choice);
 
-    if (element == -1) {
+    switch (choice) {
+    case 1:
+      printf("enter value to push: ");
+      scanf("%d", &value);
+      push(&s1, value);
       break;
+    case 2:
+      pop(&s1);
+      break;
+    case 3:
+      traverse(&s1);
+      break;
+    case 4:
+      printf("exiting...\n");
+      exit(1);
+    default:
+      printf("invalid choice\n");
     }
-    append_node(&head, element);
   }
 
-  insert_node(&head);
-
-  traverse(head);
+  return 0;
 }

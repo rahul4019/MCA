@@ -1,7 +1,7 @@
 # a set in python is a built-in data structure that represents an unordered collection of unique
 # items. sets are primarily used to perform mathematical operations like union, intersection, and
 # difference.
-# they ensure that each element in the set is usique
+# they ensure that each element in the set is unique
 
 # key characterstics of sets
 
