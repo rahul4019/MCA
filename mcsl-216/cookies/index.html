@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coookies</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        font-family: sans-serif;
+      }
+      h1 {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      form-grp {
+        display: flex;
+        width: 100%;
+      }
+      button {
+        cursor: pointer;
+        background: orange;
+        font-weight: bold;
+        border-radius: 4px;
+        padding: 4px;
+      }
+      #error {
+        color: red;
+      }
+      #success {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cookies</h1>
+    <div>
+      <form>
+        <div class="form-grp">
+          <label form="key">Cookie key: </label>
+          <input
+            type="text"
+            name="key"
+            id="key"
+            placeholder="Enter cookie key"
+          />
+        </div>
+        <div class="form-grp">
+          <label form="value">Value: </label>
+          <input
+            type="text"
+            id="value"
+            name="value"
+            placeholder="Enter cookie value"
+          />
+        </div>
+        <div class="form-grp">
+          <button type="button" id="setCookie">Set Cookies</button>
+          <button type="button" id="getCookie">Get Cookies</button>
+        </div>
+      </form>
+    </div>
+    <p id="error"></p>
+    <p id="success"></p>
+    <script src="script.js" type="text/javascript"></script>
+  </body>
+</html>
